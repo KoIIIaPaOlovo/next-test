@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
-const sql = postgres(process.env.POSTGRES_IRL!, {ssl:'require'})
+const sql = postgres(process.env.POSTGRES_URL!, {ssl:'require'})
 
 const InvoicesFormSchema = z.object({
     id: z.string(),
@@ -67,8 +67,6 @@ export async function createInvoices(prevState: State, formData: FormData) {
 
   redirect('/dashboard/invoices');
 }
-
-
  
 export async function updateInvoice(
   id: string,

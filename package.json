@@ -4,7 +4,15 @@
     "build": "next build",
     "dev": "next dev --turbopack",
     "start": "next start",
-    "lint": "eslint ."
+    "build-start": "pnpm run build && pnpm run start",
+    "lint": "eslint .",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "dotenv -e .env.test start-server-and-test start http://localhost:3000 'cypress run --spec \"cypress/e2e/auth/**/*.cy.{js,ts,jsx,tsx}\"'",
+    "test:e2e:smoke": "dotenv -e .env.test start-server-and-test start http://localhost:3000 'cypress run --spec \"cypress/e2e/auth/**/smoke/**/*.cy.{js,ts,jsx,tsx}\"'",
+    "test:e2e:full": "dotenv -e .env.test -- pnpm run build && dotenv -e .env.test -- start-server-and-test start http://localhost:3000 cy:run",
+    "test:e2e:open": "dotenv -e .env.test -- pnpm run build && dotenv -e .env.test -- start-server-and-test start http://localhost:3000 cy:open",
+    "test:dev": "dotenv -e .env.test start-server-and-test dev http://localhost:3000 cy:run"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -28,13 +36,20 @@
     "@types/node": "22.10.7",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
+    "cypress": "^15.9.0",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^16.1.6"
+    "eslint-config-next": "^16.1.6",
+    "start-server-and-test": "^2.1.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "bcrypt",
       "sharp"
+    ],
+    "ignoredBuiltDependencies": [
+      "cypress",
+      "unrs-resolver"
     ]
   }
 }
