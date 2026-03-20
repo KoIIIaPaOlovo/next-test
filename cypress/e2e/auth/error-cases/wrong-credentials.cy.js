@@ -4,9 +4,9 @@ describe('Login wrong credentials', () => {
 
     cy.url().should('include', '/login')
  
-    cy.get('input[name*="email"]').type('-')
+    cy.get('input[name*="email"]').type('test')
  
-    cy.get('input[name*="password"]').type('-')
+    cy.get('input[name*="password"]').type('test')
  
     cy.get('button').click()
 
